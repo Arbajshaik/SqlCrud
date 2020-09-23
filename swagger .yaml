@@ -13,20 +13,24 @@ basePath: /
 tags:
   - name: basic-error-controller
     description: Basic Error Controller
+  - name: product-controller
+    description: Product Controller
 paths:
   /error:
     get:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingGET
+      summary: error
+      operationId: errorUsingGET
       produces:
-        - text/html
+        - '*/*'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ModelAndView'
+            type: object
+            additionalProperties:
+              type: object
         '401':
           description: Unauthorized
         '403':
@@ -37,17 +41,19 @@ paths:
     head:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingHEAD
+      summary: error
+      operationId: errorUsingHEAD
       consumes:
         - application/json
       produces:
-        - text/html
+        - '*/*'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ModelAndView'
+            type: object
+            additionalProperties:
+              type: object
         '204':
           description: No Content
         '401':
@@ -58,17 +64,19 @@ paths:
     post:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingPOST
+      summary: error
+      operationId: errorUsingPOST
       consumes:
         - application/json
       produces:
-        - text/html
+        - '*/*'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ModelAndView'
+            type: object
+            additionalProperties:
+              type: object
         '201':
           description: Created
         '401':
@@ -81,17 +89,19 @@ paths:
     put:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingPUT
+      summary: error
+      operationId: errorUsingPUT
       consumes:
         - application/json
       produces:
-        - text/html
+        - '*/*'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ModelAndView'
+            type: object
+            additionalProperties:
+              type: object
         '201':
           description: Created
         '401':
@@ -104,15 +114,17 @@ paths:
     delete:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingDELETE
+      summary: error
+      operationId: errorUsingDELETE
       produces:
-        - text/html
+        - '*/*'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ModelAndView'
+            type: object
+            additionalProperties:
+              type: object
         '204':
           description: No Content
         '401':
@@ -123,17 +135,19 @@ paths:
     options:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingOPTIONS
+      summary: error
+      operationId: errorUsingOPTIONS
       consumes:
         - application/json
       produces:
-        - text/html
+        - '*/*'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ModelAndView'
+            type: object
+            additionalProperties:
+              type: object
         '204':
           description: No Content
         '401':
@@ -144,23 +158,198 @@ paths:
     patch:
       tags:
         - basic-error-controller
-      summary: errorHtml
-      operationId: errorHtmlUsingPATCH
+      summary: error
+      operationId: errorUsingPATCH
       consumes:
         - application/json
       produces:
-        - text/html
+        - '*/*'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ModelAndView'
+            type: object
+            additionalProperties:
+              type: object
         '204':
           description: No Content
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
+      deprecated: false
+  /test/AddProduct:
+    post:
+      tags:
+        - product-controller
+      summary: addProduct
+      operationId: addProductUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: product
+          description: product
+          required: true
+          schema:
+            $ref: '#/definitions/Product'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Product'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /test/AddProducts:
+    post:
+      tags:
+        - product-controller
+      summary: addProducts
+      operationId: addProductsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: products
+          description: products
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/test/Product/{id}':
+    get:
+      tags:
+        - product-controller
+      summary: findProductById
+      operationId: findProductByIdUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Product'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /test/Products:
+    get:
+      tags:
+        - product-controller
+      summary: findAllProducts
+      operationId: findAllProductsUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/test/delete/{id}':
+    delete:
+      tags:
+        - product-controller
+      summary: deleteProduct
+      operationId: deleteProductUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /test/update:
+    put:
+      tags:
+        - product-controller
+      summary: updatProduct
+      operationId: updatProductUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: product
+          description: product
+          required: true
+          schema:
+            $ref: '#/definitions/Product'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Product'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       deprecated: false
 definitions:
   ModelAndView:
@@ -252,6 +441,21 @@ definitions:
       viewName:
         type: string
     title: ModelAndView
+  Product:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      name:
+        type: string
+      price:
+        type: number
+        format: double
+      quantity:
+        type: integer
+        format: int32
+    title: Product
   View:
     type: object
     properties:
