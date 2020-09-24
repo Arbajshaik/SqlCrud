@@ -9,8 +9,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
  
 @EnableSwagger2
-@EnableJpaRepositories(basePackages="service,repository,controller")
-@EntityScan(basePackages="service,repository,controller")
+@ComponentScan(basePackages="service,repository,controller")
+@EnableJpaRepositories(basePackages="repository")
+@EntityScan(basePackages="entity")
 @SpringBootApplication
 public class CrudSqlApplication {
 

@@ -1,37 +1,25 @@
-package entity;
+package Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.sun.istack.NotNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+public class ProductRequest {
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Table(name = "PRODUCT_TBL")
-public class Product {
-	@Id
-	@GeneratedValue
 	private int id;
-
+	@NotBlank(message = "name must required")
 	private String name;
-
+	@Max(5)
 	private int quantity;
-
+	@Min(1000)
 	private double price;
-
+	@Min(0)
+	@Max(5)
 	private int review;
 
 	public int getId() {
@@ -64,7 +52,6 @@ public class Product {
 
 	public void setPrice(double price) {
 		this.price = price;
-
 	}
 
 	public int getReview() {
