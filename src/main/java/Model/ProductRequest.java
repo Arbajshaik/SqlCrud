@@ -3,14 +3,13 @@ package Model;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
-import com.sun.istack.NotNull;
+import org.springframework.web.bind.annotation.RestController;
 
 public class ProductRequest {
 
+	
 	private int id;
 	@NotBlank(message = "name must required")
 	private String name;

@@ -32,29 +32,20 @@ public class ProductService {
 		return repository.findAll();
 	}
 
-	public Product getProductByname(String name) {
-		return repository.findAll().stream().filter(findname -> findname.getName().equalsIgnoreCase(name)).findFirst()
-				.get();
-	}
 
-	public Product getProductById(int id) throws Exception {
-		try {
-			Product product = repository.findById(id).orElse(null);
-			if (product != null) {
-				return product;
-			} else {
-				throw new Exception("Requested resource with id" + id + "not found");
-			}
-		} catch (Exception e) {
-
-			throw new Exception("Requested resource with id" + id + "not found");
-		}
-
-	}
-
+	
+	  public Product getProductById(int id) throws Exception { try { Product
+	  product = repository.findById(id).orElse(null); if (product != null) { return
+	  product; } else { throw new Exception("Requested resource with id" + id +
+	  "not found"); } } catch (Exception e) {
+	  
+	  throw new Exception("Requested resource with id" + id + "not found"); }
+	  
+	  }
+	 
 	public String deleteProduct(int id) {
 		repository.deleteById(id);
-		return " Requested product remove !! " + id;
+		return "product remove !! " + id;
 	}
 
 	public Product updateProduct(Product product) {
@@ -62,7 +53,13 @@ public class ProductService {
 		existingProduct.setName(product.getName());
 		existingProduct.setQuantity(product.getQuantity());
 		existingProduct.setPrice(product.getPrice());
+		existingProduct.setReview(product.getReview());
 		return repository.save(existingProduct);
+	}
+
+	public Product getProductByname(String name) {
+		return repository.findAll().stream().filter(findname -> findname.getName().equalsIgnoreCase(name)).findFirst()
+				.get();
 	}
 
 }

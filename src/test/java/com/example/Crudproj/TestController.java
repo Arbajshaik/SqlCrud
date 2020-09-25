@@ -44,7 +44,8 @@ class TestController {
 
 	List<Product> products = new ArrayList<Product>();
 	ObjectMapper mAPPER = new ObjectMapper();
-	protected MockMvc mvc;
+	
+	MockMvc mvc;
 
 	@Before
 	public void setUp() {
@@ -93,7 +94,11 @@ class TestController {
 	public void updateProduct() throws Exception {
 		String uri = "/productcategory/product";
 		Product product = new Product();
+		product.setId(1);
 		product.setName("java");
+		product.setPrice(20000);
+		product.setQuantity(3);
+		product.setReview(4);
 		String inputJson = mapToJson(product);
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))

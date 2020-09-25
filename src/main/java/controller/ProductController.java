@@ -21,6 +21,7 @@ import entity.Product;
 import repository.ProductRepository;
 import service.ProductService;
 
+
 @RequestMapping("/productcategory")
 @RestController
 @Validated
@@ -34,6 +35,11 @@ public class ProductController {
 		return service.saveProduct(productRequest);
 	}
 
+	/*
+	 * @PostMapping("/Products") public List<Product> addProducts(@RequestBody
+	 * List<Product> products) { return service.saveProducts(products); }
+	 */
+
 	@GetMapping("/products")
 	public List<Product> findAllProducts() {
 		return service.getProducts();
@@ -44,9 +50,9 @@ public class ProductController {
 		return service.getProductById(id);
 	}
 
-	@GetMapping("/product/{name}")
-	public Product findProductByname(@PathVariable String name) {
-		return service.getProductByname(name);
+	@GetMapping("/Product/{name}")
+	 public Product findProductByname(@PathVariable String name){
+	 return service.getProductByname(name);
 	}
 
 	@PutMapping("/product")
