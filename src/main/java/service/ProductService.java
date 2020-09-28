@@ -1,12 +1,10 @@
 package service;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import Model.ProductRequest;
+import model.ProductRequest;
 import entity.Product;
 import repository.ProductRepository;
 
@@ -32,17 +30,21 @@ public class ProductService {
 		return repository.findAll();
 	}
 
+	public Product getProductById(int id) throws Exception {
+		try {
+			Product product = repository.findById(id).orElse(null);
+			if (product != null) {
+				return product;
+			} else {
+				throw new Exception("Requested resource with id" + id + "not found");
+			}
+		} catch (Exception e) {
 
-	
-	  public Product getProductById(int id) throws Exception { try { Product
-	  product = repository.findById(id).orElse(null); if (product != null) { return
-	  product; } else { throw new Exception("Requested resource with id" + id +
-	  "not found"); } } catch (Exception e) {
-	  
-	  throw new Exception("Requested resource with id" + id + "not found"); }
-	  
-	  }
-	 
+			throw new Exception("Requested resource with id" + id + "not found");
+		}
+
+	}
+
 	public String deleteProduct(int id) {
 		repository.deleteById(id);
 		return "product remove !! " + id;

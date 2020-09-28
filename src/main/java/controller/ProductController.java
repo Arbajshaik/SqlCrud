@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import Model.ProductRequest;
+import model.ProductRequest;
 import entity.Product;
-import repository.ProductRepository;
 import service.ProductService;
-
 
 @RequestMapping("/productcategory")
 @RestController
@@ -35,11 +32,6 @@ public class ProductController {
 		return service.saveProduct(productRequest);
 	}
 
-	/*
-	 * @PostMapping("/Products") public List<Product> addProducts(@RequestBody
-	 * List<Product> products) { return service.saveProducts(products); }
-	 */
-
 	@GetMapping("/products")
 	public List<Product> findAllProducts() {
 		return service.getProducts();
@@ -51,8 +43,8 @@ public class ProductController {
 	}
 
 	@GetMapping("/Product/{name}")
-	 public Product findProductByname(@PathVariable String name){
-	 return service.getProductByname(name);
+	public Product findProductByname(@PathVariable String name) {
+		return service.getProductByname(name);
 	}
 
 	@PutMapping("/product")

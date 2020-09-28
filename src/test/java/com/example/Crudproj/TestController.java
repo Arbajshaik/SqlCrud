@@ -44,8 +44,7 @@ class TestController {
 
 	List<Product> products = new ArrayList<Product>();
 	ObjectMapper mAPPER = new ObjectMapper();
-	
-	MockMvc mvc;
+	protected MockMvc mvc;
 
 	@Before
 	public void setUp() {
@@ -65,12 +64,10 @@ class TestController {
 
 	@Test
 	public void getProducts() throws Exception {
-		String uri = "/productcategory/products";
-		MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON_VALUE))
-				.andReturn();
+		String uri="/productcategory/products";
+		MvcResult result=mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 		String content = result.getResponse().getContentAsString();
 		assertNotNull(content);
-
 	}
 
 	@Test
